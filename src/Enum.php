@@ -11,13 +11,9 @@ use Spatie\Enum\Laravel\Casts\EnumCollectionCast;
 
 abstract class Enum extends BaseEnum implements Jsonable, Castable
 {
-    public static function castUsing(array $arguments): CastsAttributes
+    public static function castUsing(): CastsAttributes
     {
-        if (in_array('collection', $arguments)) {
-            return new EnumCollectionCast(static::class, ...$arguments);
-        }
-
-        return new EnumCast(static::class, ...$arguments);
+        return new EnumCast(static::class);
     }
 
     public function toJson($options = 0): string
